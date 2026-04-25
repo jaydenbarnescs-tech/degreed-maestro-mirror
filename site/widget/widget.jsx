@@ -21,38 +21,28 @@ const W = {
       border:'1px solid rgba(255,255,255,.08)',
       fontWeight:600, fontSize:14, letterSpacing:'-.01em'
     } : {
-      width:64, height:64, borderRadius:32,
-      background:'radial-gradient(circle at 35% 30%, #1a3a6a 0%, #0b1f3a 65%)',
+      width:60, height:60, borderRadius:30,
+      // Coral/orange gradient — Degreed brand accent. High contrast on both light and dark host pages.
+      background:'linear-gradient(135deg, #ff7a5c 0%, #ff5a3a 100%)',
       color:'#fff',
       display:'grid', placeItems:'center',
-      boxShadow:'0 18px 40px -12px rgba(11,31,58,.55), 0 4px 14px -4px rgba(255,106,77,.35), inset 0 1px 0 rgba(255,255,255,.1)',
-      border:'1px solid rgba(255,255,255,.08)'
+      // Strong layered shadow: warm glow + crisp drop
+      boxShadow:'0 14px 32px -8px rgba(255,90,58,.55), 0 6px 14px -4px rgba(11,31,58,.25), inset 0 1px 0 rgba(255,255,255,.25), inset 0 -2px 0 rgba(0,0,0,.08)',
+      border:'1.5px solid rgba(255,255,255,.4)'
     })
   }),
   launcherDot: {
-    position:'absolute', top:2, right:2,
-    width:12, height:12, borderRadius:'50%',
+    position:'absolute', top:0, right:0,
+    width:14, height:14, borderRadius:'50%',
     background:'#22c55e',
-    boxShadow:'0 0 0 2px #0b1f3a, 0 0 10px rgba(34,197,94,.8)',
-    animation:'dwStatusPulse 2s ease-in-out infinite'
+    boxShadow:'0 0 0 2.5px #fff, 0 0 8px rgba(34,197,94,.65)',
+    animation:'dwStatusPulse 2.4s ease-in-out infinite'
   },
-  halo: {
-    position:'absolute', inset:-6, borderRadius:'50%',
-    background:'conic-gradient(from 0deg, rgba(255,106,77,.0) 0%, rgba(255,106,77,.55) 25%, rgba(200,182,255,.55) 55%, rgba(255,106,77,.0) 100%)',
-    filter:'blur(6px)',
-    animation:'dwSpin 6s linear infinite',
-    opacity:.85, pointerEvents:'none'
-  },
+  // Single subtle pulsing ring — hint of "live" without being busy
   ripple: {
-    position:'absolute', inset:0, borderRadius:'50%',
-    border:'2px solid rgba(255,106,77,.45)',
-    animation:'dwPulse 2.6s ease-out infinite',
-    pointerEvents:'none'
-  },
-  ripple2: {
-    position:'absolute', inset:0, borderRadius:'50%',
-    border:'2px solid rgba(200,182,255,.35)',
-    animation:'dwPulse 2.6s 1.3s ease-out infinite',
+    position:'absolute', inset:-4, borderRadius:'50%',
+    border:'2px solid rgba(255,106,77,.35)',
+    animation:'dwPulse 2.8s ease-out infinite',
     pointerEvents:'none'
   },
   peekBubble: {
@@ -277,6 +267,22 @@ function AgentIcon({size=22, color='#fff'}){
       <circle cx="9.5" cy="10.5" r="1" fill={color}/>
       <circle cx="14.5" cy="10.5" r="1" fill={color}/>
       <path d="M9 13.5c.8.8 2 1 3 1s2.2-.2 3-1" stroke={color} strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+// Clean speech-bubble icon for the launcher — replaces the cartoon face.
+// Filled white bubble with three dots inside (universal "chat" signifier).
+function ChatBubbleIcon({size=26, color='#fff'}){
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{display:'block'}}>
+      <path
+        d="M5 4.5h14a2.5 2.5 0 0 1 2.5 2.5v8a2.5 2.5 0 0 1-2.5 2.5h-7.2L7.6 21v-3.5H5A2.5 2.5 0 0 1 2.5 15V7A2.5 2.5 0 0 1 5 4.5z"
+        fill={color}
+      />
+      <circle cx="8" cy="11" r="1.2" fill="#ff5a3a"/>
+      <circle cx="12" cy="11" r="1.2" fill="#ff5a3a"/>
+      <circle cx="16" cy="11" r="1.2" fill="#ff5a3a"/>
     </svg>
   );
 }
@@ -567,15 +573,13 @@ If the user needs human help, suggest "Request agent".`;
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {/* layered aura / ripples */}
-                <span style={W.halo}/>
+                {/* Single subtle pulsing ring — signals "live" without busy halo */}
                 <span style={W.ripple}/>
-                <span style={W.ripple2}/>
                 <span style={{
                   position:'relative', width:'100%', height:'100%',
                   display:'grid', placeItems:'center'
                 }}>
-                  <MaestroFace listening={launchHover}/>
+                  <ChatBubbleIcon size={26} />
                 </span>
                 <span style={W.launcherDot}/>
               </React.Fragment>
