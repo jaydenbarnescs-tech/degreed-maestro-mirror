@@ -616,12 +616,6 @@ If the user needs human help, suggest "Request agent".`;
               </div>
             </div>
 
-            {messages.length === 0 && mode === 'chat' && (
-              <React.Fragment>
-                <h2 style={W.greeting}>{t.greet}</h2>
-                <p style={W.greetSub}>{t.greetSub}</p>
-              </React.Fragment>
-            )}
           </header>
 
           {mode === 'voice' ? (
@@ -645,6 +639,14 @@ If the user needs human help, suggest "Request agent".`;
               <div style={W.body} ref={bodyRef}>
                 {messages.length === 0 && (
                   <React.Fragment>
+                    {/* Initial greeting bubble — gives the user someone to "talk to" from the get-go */}
+                    <Bubble role="assistant">
+                      <div style={{whiteSpace:'pre-wrap'}}>
+                        {lang === 'ja'
+                          ? `いらっしゃいませ。Degreedカスタマーサポートの${agentNameInLang}と申します。\n本日はどのようなご用件でしょうか？お気軽にお聞かせください。`
+                          : `Hi there — ${agentNameInLang} from Degreed customer support. How can I help you today? Feel free to ask anything.`}
+                      </div>
+                    </Bubble>
                     <div style={W.quickTitle}>{t.quickTitle}</div>
                     <div style={W.quickList}>
                       {t.quicks.map(([q, bg], i) => (
