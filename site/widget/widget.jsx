@@ -643,7 +643,7 @@ If the user needs human help, suggest "Request agent".`;
                     <Bubble role="assistant">
                       <div style={{whiteSpace:'pre-wrap'}}>
                         {lang === 'ja'
-                          ? `いらっしゃいませ。Degreedカスタマーサポートの${agentNameInLang}と申します。\n本日はどのようなご用件でしょうか？お気軽にお聞かせください。`
+                          ? `Degreedカスタマーサポートの${agentNameInLang}と申します。\n本日はどのようなご用件でしょうか？お気軽にお聞かせください。`
                           : `Hi there — ${agentNameInLang} from Degreed customer support. How can I help you today? Feel free to ask anything.`}
                       </div>
                     </Bubble>
